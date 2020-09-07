@@ -1,0 +1,48 @@
+﻿@model IEnumerable<AspCoreSolution.Models.RegisterBoat>
+
+@{
+    ViewData["Title"] = "Index";
+}
+<h2>Index</h2>
+<p>
+    <a asp-action="RegisterCreate">Register NewBoat</a>
+</p>
+<table class="table table-bordered table-responsive">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.BoatName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BoatSpeed)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.RegisterId)
+            </th>
+            
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.BoatName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.BoatSpeed)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.RegisterId)
+                </td>               
+                <td>
+                    @*<a asp-action="Edit_customer" asp-route-id="@item.ID">Edit</a> |
+                    <a asp-action="customer_Details" asp-route-id="@item.ID">Details</a> |
+                    <a asp-action="Delete_customer" asp-route-id="@item.ID">Delete</a>*@
+                </td>
+            </tr>
+
+        }
+    </tbody>
+</table>
