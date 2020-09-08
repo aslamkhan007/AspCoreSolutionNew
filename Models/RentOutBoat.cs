@@ -10,9 +10,7 @@ namespace AspCoreSolution.Models
     {
         public int SrId { get; set; }
 
-        [Required(ErrorMessage = "Enter RegisterId")]
-        [StringLength(50, ErrorMessage = "Name should be less than or equal to Fifty characters.")]
-        public string RegisterId { get; set; }
+       
 
         [Required(ErrorMessage = "Enter Your CustomerName")]
         [StringLength(100, ErrorMessage = "Name should be less than or equal to Fifty characters.")]

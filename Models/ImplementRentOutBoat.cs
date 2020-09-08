@@ -18,22 +18,27 @@ namespace AspCoreSolution.Models
             _Configuration = configuration;
         }
        
-        public RegisterBoat AddRentOutBoats(RegisterBoat rentOutBoat)
+        public int AddRentOutBoats(RentOutBoat rentOutBoat)
         {
+            var res= 0;
             string connectionString = _Configuration["ConnectionStrings:DefaultConnection"];
             using (SqlConnection con = new SqlConnection(connectionString))
             {
-                SqlCommand cmd = new SqlCommand("RegisterBoat_Add", con);
+                SqlCommand cmd = new SqlCommand("RentOutBoat_Add", con);
                 cmd.CommandType = CommandType.StoredProcedure;
 
                 cmd.Parameters.AddWithValue("@BoatName", rentOutBoat.BoatName);
-                cmd.Parameters.AddWithValue("@BoatSpeed", rentOutBoat.BoatSpeed);
+                cmd.Parameters.AddWithValue("@CustomerName", rentOutBoat.CustomerName);
                 con.Open();
-                cmd.ExecuteNonQuery();
+
+                res   =  cmd.ExecuteNonQuery();
                 con.Close();
+                
             }
-            return rentOutBoat;
+            return res;
         }
+
+        
 
         public IEnumerable<RentOutBoat> GetAllRentOutBoats()
         {
@@ -48,9 +53,9 @@ namespace AspCoreSolution.Models
                 while (sdr.Read())
                 {
                     RentOutBoat Customer = new RentOutBoat();
-                    //Customer.BoatName = sdr["BoatName"].ToString();
+                    Customer.BoatName = sdr["BoatName"].ToString();
                     Customer.CustomerName = sdr["CustomerName"].ToString();
-                    Customer.RegisterId = sdr["RegisterId"].ToString();
+                    //Customer.RegisterId = sdr["RegisterId"].ToString();
                     lstCustomer.Add(Customer);
                 }
                 con.Close();

@@ -8,6 +8,6 @@ namespace AspCoreSolution.Models
     public interface IRegisterBoat
     {
         IEnumerable<RegisterBoat> GetAllBoats();
-        RegisterBoat AddBoats(RegisterBoat registerBoat);
+        String AddBoats(RegisterBoat registerBoat);
     }
 }

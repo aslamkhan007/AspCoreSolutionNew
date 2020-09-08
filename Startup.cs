@@ -25,6 +25,7 @@ namespace AspCoreSolution
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddScoped<IRegisterBoat, ImplementRegisterBoat>();
+            services.AddScoped<IRentOutBoat, ImplementRentOutBoat>();
             services.AddSingleton<IConfiguration>(Configuration);
             services.AddControllersWithViews();
         }

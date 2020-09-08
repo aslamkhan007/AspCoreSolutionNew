@@ -16,8 +16,9 @@ namespace AspCoreSolution.Models
         {
             _Configuration = configuration;
         }
-        public RegisterBoat AddBoats(RegisterBoat registerBoat)
+        public string AddBoats(RegisterBoat registerBoat)
         {
+            string message = "";
             string connectionString = _Configuration["ConnectionStrings:DefaultConnection"];
             using (SqlConnection con = new SqlConnection(connectionString))
             {
@@ -26,12 +27,15 @@ namespace AspCoreSolution.Models
                 cmd.CommandType = CommandType.StoredProcedure;
 
                 cmd.Parameters.AddWithValue("@BoatName", registerBoat.BoatName);
-                cmd.Parameters.AddWithValue("@BoatSpeed", registerBoat.BoatSpeed);               
+                cmd.Parameters.AddWithValue("@BoatSpeed", registerBoat.BoatSpeed);
+                cmd.Parameters.Add("@SeriesCode", SqlDbType.Char, 500);
+                cmd.Parameters["@SeriesCode"].Direction = ParameterDirection.Output;
                 con.Open();
                 cmd.ExecuteNonQuery();
+                message = (string)cmd.Parameters["@SeriesCode"].Value;
                 con.Close();
             }
-            return registerBoat;
+            return message;
         }
        
         public IEnumerable<RegisterBoat> GetAllBoats()

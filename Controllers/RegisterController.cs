@@ -35,8 +35,7 @@ namespace AspCoreSolution.Controllers
         {
             if (ModelState.IsValid)
             {
-                _registerboat.AddBoats(cust);
-                return RedirectToAction("Index");
+                ViewData["result"] = _registerboat.AddBoats(cust);
             }
             return View(cust);
         }
